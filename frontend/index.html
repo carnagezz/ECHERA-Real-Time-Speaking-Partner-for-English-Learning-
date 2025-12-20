@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Echera</title>
+  <meta name="description" content="Real-Time Speaking Partner - Practice English with AI-powered conversations" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="topbar">
+    <div class="brand">Echera</div>
+    <div class="nav">
+      <a href="#/chat" id="navChat" style="display:none">Chat</a>
+      <a href="#/profile" id="navProfile" style="display:none">Profile</a>
+      <a href="#/settings" id="navSettings" style="display:none">Voice Selection</a>
+      <button id="btnLogout" class="btn small" style="display:none">Logout</button>
+    </div>
+  </div>
+
+  <div id="pageLogin" class="page">
+    <div class="authContainer">
+      <div class="brandingHeader">
+        <h1 class="appName">ECHERA</h1>
+        <p class="appTagline">Your AI-Powered English Speaking Partner</p>
+      </div>
+      
+      <div class="authCard">
+        <h2>Welcome Back</h2>
+        <div class="row"><input id="loginEmail" type="email" placeholder="Email" /></div>
+        <div class="row"><input id="loginPassword" type="password" placeholder="Password" /></div>
+        <div class="row"><button id="btnLogin" class="btn">Login</button></div>
+        <div class="msg" id="loginMsg"></div>
+        <div class="authSwitch">
+          Don't have an account? <a href="#" id="linkToRegister">Register</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="pageRegister" class="page hidden">
+    <div class="authContainer">
+      <div class="brandingHeader">
+        <h1 class="appName">ECHERA</h1>
+        <p class="appTagline">Your AI-Powered English Speaking Partner</p>
+      </div>
+      
+      <div class="authCard">
+        <h2>Create Account</h2>
+        <div class="row"><input id="regEmail" type="email" placeholder="Email" /></div>
+        <div class="row"><input id="regNick" type="text" placeholder="Nickname" /></div>
+        <div class="row"><input id="regPassword" type="password" placeholder="Password (min 8 chars)" /></div>
+        <div class="row"><button id="btnRegister" class="btn">Register</button></div>
+        <div class="msg" id="regMsg"></div>
+        <div class="authSwitch">
+          Already have an account? <a href="#" id="linkToLogin">Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pageChat" class="page hidden">
+    <div id="layout">
+      <div class="panel">
+        <div class="panelHeader">
+          <span>History</span>
+          <button id="btnNew" class="btn small">New</button>
+        </div>
+        <div id="historyList" class="list"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panelHeader">
+          <span id="chatTitle">New conversation</span>
+          <button id="btnDelete" class="btn small danger">Delete</button>
+        </div>
+        
+        <div id="chatLog" class="chatLog"></div>
+        
+        <div class="composer">
+          <button id="btnMode" class="btn mode-toggle">🗨️ Text Mode</button>
+          <input id="messageInput" type="text" placeholder="Type your message..." />
+          <button id="btnMic" class="btn small">🎙️ Mic</button>
+          <button id="btnSend" class="btn">Send</button>
+        </div>
+        
+        <div id="indicator" class="indicator hidden"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panelHeader">
+          <span>Feedback</span>
+        </div>
+        <div class="feedback">
+          <div class="scoreRow">
+            <span>Fluency</span>
+            <span id="fluency">-</span>
+          </div>
+          <div class="scoreRow">
+            <span>Word choice</span>
+            <span id="wordChoice">-</span>
+          </div>
+          <div class="scoreRow">
+            <span>Grammar</span>
+            <span id="grammar">-</span>
+          </div>
+          
+          <div class="tips">
+            <div class="tipsHeader">Tips</div>
+            <ul id="tipsList"></ul>
+          </div>
+          
+          <div id="fbMsg" class="msg"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pageProfile" class="page hidden">
+    <div class="panel wide">
+      <div class="panelHeader">
+        <span>Profile & Statistics</span>
+      </div>
+      <div class="content">
+        <div class="grid2">
+          <div class="card">
+            <h3>Account Information</h3>
+            <div class="label">Email</div>
+            <div id="pEmail">-</div>
+            
+            <div class="label">Nickname</div>
+            <div id="pNick">-</div>
+            
+            <div class="label">Total Conversations</div>
+            <div id="pConvs">-</div>
+            
+            <div class="label">Total Messages</div>
+            <div id="pMsgs">-</div>
+            
+            <br>
+            
+            <h3>Update Profile</h3>
+            <div class="row">
+              <input id="updateNickname" type="text" placeholder="New Nickname (min 2 chars)" />
+            </div>
+            <div class="row">
+              <input id="updatePassword" type="password" placeholder="New Password (min 8 chars)" />
+            </div>
+            <div class="row">
+              <button id="btnUpdateProfile" class="btn">Update Profile</button>
+            </div>
+            <div id="updateMsg" class="msg"></div>
+          </div>
+          
+          <div class="card">
+            <h3>Average Performance</h3>
+            <div class="label">Average Fluency</div>
+            <div id="pFlu">-</div>
+            
+            <div class="label">Average Word Choice</div>
+            <div id="pWc">-</div>
+            
+            <div class="label">Average Grammar</div>
+            <div id="pGr">-</div>
+          </div>
+        </div>
+        
+        <div class="msg" id="profileMsg"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pageSettings" class="page hidden">
+    <div class="panel wide">
+      <div class="content">
+        <h3>Voice Selection</h3>
+        <p class="label">Select AI voice for text-to-speech playback:</p>
+        
+        <div id="voiceList" class="voiceList"></div>
+        
+        <div class="row">
+          <button id="btnPreview" class="btn small">🎧 Preview</button>
+          <button id="btnSaveVoice" class="btn small">Save</button>
+        </div>
+        
+        <div class="msg" id="settingsMsg"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
